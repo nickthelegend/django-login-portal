@@ -1,17 +1,169 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #444;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .header form {
+            margin: 0;
+        }
+
+        .header button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .header button:hover {
+            background-color: #0056b3;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stats-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stats-card h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .stats-card p {
+            margin: 5px 0 0 0;
+            color: #777;
+        }
+
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 10px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Welcome, {{ user.username }}!</h2>
-    {% if user.is_authenticated %}
-    <form method="post" action="{% url 'logout' %}">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    {% else %}
-        <p><a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
+    <div class="sidebar">
+        <h2>Admin Dashboard</h2>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Users</a>
+            <a href="#">Settings</a>
+            <a href="#">Reports</a>
+            <a href="#">Analytics</a>
+        </nav>
+        <footer class="footer">
+            <p>&copy; 2024 Admin Dashboard</p>
+        </footer>
+    </div>
+    <div class="main-content">
+        <div class="header">
+            <h2>Welcome, {{ user.username }}!</h2>
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            {% else %}
+                <p><a href="{% url 'login' %}">Login</a></p>
+            {% endif %}
+        </div>
+
+        <div class="stats-grid">
+            <div class="stats-card">
+                <h3>150</h3>
+                <p>Total Users</p>
+            </div>
+            <div class="stats-card">
+                <h3>120</h3>
+                <p>Active Users</p>
+            </div>
+            <div class="stats-card">
+                <h3>30</h3>
+                <p>New Registrations</p>
+            </div>
+            <div class="stats-card">
+                <h3>80%</h3>
+                <p>Engagement Rate</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
